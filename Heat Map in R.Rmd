@@ -1,0 +1,91 @@
+---
+title: "CIS 661 Analysis code"
+author: "Mike Stawinski"
+date: "10/22/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+library(tidyverse)
+library(tibble)
+
+rm(list=ls())
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+Collecting data and making data frame
+
+```{r}
+U133A_AD_tangle_vs_AD_control_95
+
+U133A_AD_tangle_vs_AD_control_all
+
+dim(U133A_AD_tangle_vs_AD_control_all)
+summary(U133A_AD_tangle_vs_AD_control_all)
+
+U133A_AD_tangle_vs_AD_control_all <- data.frame(U133A_AD_tangle_vs_AD_control_all)
+U133A_AD_tangle_vs_AD_control_all
+
+#U133A_AD_tangle_vs_AD_control_all <- gather(data=U133A_AD_tangle_vs_AD_control_all, 'AD.control.9','AD.control.10', 'AD.control.11' , 'AD.control.12' , 'AD.control.13' , 'AD.control.14' , 'AD.control.15' , 'AD.control.16' , 'AD.control.17', key="AD Control",value="value",na.rm = FALSE,convert = FALSE)
+#U133A_AD_tangle_vs_AD_control_all
+
+#pairs
+
+U133A_AD_tangle_vs_AD_control_all <- mutate(.data=U133A_AD_tangle_vs_AD_control_all, Pair_9 = ('AD.control.9' - 'AD.tangle.10')
+
+select(data=U133A_AD_tangle_vs_AD_control_all,'AD.control.9','AD.tangle.10')
+```
+
+
+```{r}
+U133A_AD_tangle_vs_AD_control_all
+
+select(.data=U133A_AD_tangle_vs_AD_control_all,'AD.control.9','AD.tangle.10')
+
+x <- head(U133A_AD_tangle_vs_AD_control_all, 100)
+
+mutate(.data=U133A_AD_tangle_vs_AD_control_all, Pair_9 = (AD.control.9 - AD.tangle.10))
+
+slice
+
+x
+ggplot(data=x,mapping = aes(Probe.Set.Name, 'Pair_9')) + geom_tile(mapping = aes(fill = 'Pair_9'))
+                                                                                                   
+U133_plus_2_0_AD_Transposed 
+
+x10 <- head(U133_plus_2_0_AD_Transposed, 100)
+
+ggplot(data=U133_plus_2_0_AD_Transposed, mapping = aes(ProbeSetName, Index1)) + geom_tile(mapping = aes(fill = trans1))
+
+#solid start
+ggplot(data=x10, mapping = aes(Index1, ProbeSetName)) + geom_tile(mapping = aes(fill = trans1))
+```
+
+```{r}
+mutate(.data=U133A_AD_tangle_vs_AD_control_all, Pair_9 = (Signal - AD.tangle.10))
+
+
+x 
+
+```
+
