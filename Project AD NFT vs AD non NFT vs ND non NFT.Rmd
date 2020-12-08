@@ -1,0 +1,138 @@
+---
+title: "CIS 661 Project Analysis"
+author: "Mike Stawinski"
+date: "10/19/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+
+```{r}
+library(tibble)
+install.packages("tidyverse")
+library(tidyverse)
+library(qu)
+```
+
+
+
+geom_quantile()
+
+
+
+
+```{r}
+AD_control_vs_ND_control
+
+dim(AD_control_vs_ND_control)
+summary(AD_control_vs_ND_control)
+
+AD_control_vs_ND_control <- data.frame(AD_control_vs_ND_control)
+
+Total_AD_control <- gather(data=AD_control_vs_ND_control, 'AD.control.1','AD.control.2', 'AD.control.3' , 'AD.control.4' , 'AD.control.5' , 'AD.control.6' , 'AD.control.7' , 'AD.control.8' , 'AD.control.9',
+                           key="Total AD Control",value="value",na.rm = FALSE,convert = FALSE)
+Total_AD_control 
+
+Total_ND_control <- gather(data=Total_AD_control, 'ND.control.1','ND.control.2', 'ND.control.3' , 'ND.control.4' , 'ND.control.5' , 'ND.control.6' , 'ND.control.7' , 'ND.control.8' , 'ND.control.9',
+                           key="Total ND Control",value="value2",na.rm = FALSE,convert = FALSE)
+Total_ND_control 
+
+
+
+#AD.control.2  AD.control.3 , AD.control.4 , AD.control.5 , AD.control.6 , AD.control.7 , AD.control.8 , AD.control.9
+#, ND.control.2 , ND.control.3 , ND.control.4 , ND.control.5 , ND.control.6 , ND.control.7 , ND.control.8, ND.control.9 
+
+ggplot(data = AD_control_vs_ND_control, mapping = aes(x = AD.control.1  , y = ND.control.1 , color = ND.control.1)) + geom_point() + scale_size_area(,max_size = 6)
+
+?ggplot
+?aes
+?sum
+?mean
+?quant
+
+Total_ND_control2 <- mutate(.data = Total_ND_control, value_log = log(value)) %>%
+  mutate(value2_log = log(value2))
+Total_ND_control2
+
+
+ggplot(data = Total_ND_control, mapping = aes(x = value  , y = value2 , color = value2, color = value)) + geom_point() + scale_x_log10() + scale_y_log10() + geom_quantile()
+  
+  #coord_cartesian(xlim = c(1,10000), ylim = c(1,10000))
+
+Total_ND_control
+
+
+ggplot(data = Total_ND_control2, mapping = aes(x = value_log  , y = value2_log , color = value2, scale_m)) + geom_point() + coord_cartes
+ian(xlim = c(1,1000), ylim = c(1,1000))
+
+
+ggplot(data = Total_ND_control, mapping = aes(x = ND.control.10  , y = ND.control.11 , color = value2, color = value)) + geom_point() + scale_x_log10() + scale_y_log10() + geom_quantile() +
+  coord_cartesian(xlim = c(1,1000), ylim = c(1,1000))
+
+
+c <- ggplot(Total_AD_ND_control)
+c + geom_qq(aes(sample=ND.control.11))
+
+
+Total_AD_ND_control <- Total_ND_control
+Total_AD_ND_control
+```
+
+Heat map
+
+```{r}
+Total_AD_ND_control %>%
+  count(`Total AD Control`, Probe.Set.Name) %>%
+  ggplot(mapping = aes(`Total AD Control` , Probe.Set.Name)) +
+    geom_tile(mapping = aes(fill = 'value'))
+  
+```
+
+
+
+
+
+
+
+
+
+October 22nd
+
+```{r}
+AD_controlff
+
+
+
+```
+
+
+
+
+
+
+
+
