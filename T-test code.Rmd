@@ -1,0 +1,58 @@
+---
+title: "CIS Project Take 5"
+author: "Mike Stawinski"
+date: "10/28/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#Libraries
+library(tidyverse)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+#TTEST#
+
+```{r cars}
+U133A_AD_tangle_vs_AD_control_all <- data.frame(U133A_AD_tangle_vs_AD_control_all)
+
+column <- select(U133A_AD_tangle_vs_AD_control_all,AD.control.9) 
+
+#as.vector(t(transposed))
+
+x <- U133A_AD_tangle_vs_AD_control_all[1,]
+as.vector(t(x))
+
+transposed <- data.frame(t(U133A_AD_tangle_vs_AD_control_all))
+transposed
+
+names(transposed) <- as.matrix(transposed[1,])
+transposed <- transposed[-1,]
+transposed[] <- lapply(transposed, function(m) type.convert(as.character(m)))
+transposed
+
+AD_control <- slice(transposed,1:10)
+AD_control <- data.frame(AD_control)
+AD_control
+
+AD_tangle <- slice(transposed,11:20)
+AD_tangle <- data.frame(AD_tangle)
+AD_tangle
+
+x1 <- as.vector(select(AD_control,'X217865_at'))
+x2 <- as.vector(select(AD_tangle,'X217865_at'))
+
+
+t.test(x1, x2, Paired = TRUE)
+
+
+
+```
+
